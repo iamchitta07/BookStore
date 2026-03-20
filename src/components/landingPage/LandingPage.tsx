@@ -1,9 +1,12 @@
+import TrendingBooks from "../layouts/treandingBooks/TrendingBooks";
+
+
 const LandingPage = () => {
-    return (
-        <div>
-            Landing Page
-        </div>
-    );
-}
+  return (
+    <div>
+      <TrendingBooks />
+    </div>
+  );
+};
 
 export default LandingPage;

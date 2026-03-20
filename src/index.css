@@ -1,7 +1,14 @@
 @font-face {
   font-family: 'Big Shoulders Display';
   src: url('/fonts/big-shoulders-display.bold.ttf') format('truetype');
-  font-weight: 100 900;
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Big Shoulders Display';
+  src: url('/fonts/big-shoulders-display.regular.ttf') format('truetype');
+  font-weight: 400;
   font-style: normal;
 }
 
@@ -20,6 +27,7 @@
   --color-col-seven: #A5B4FB;
   --color-background: #FFF59F;
   --color-expired: #666666;
+  --color-star-stroke: #F8C315;
 
   --font-sans: "Big Shoulders Display", sans-serif;
 }

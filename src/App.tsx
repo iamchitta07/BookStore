@@ -3,8 +3,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 // Component Imports
 import LandingPage from "./components/landingPage/LandingPage";
-import PageNotFound from "./components/pageNotFound/PageNotFound";
-import CenterCarousel from "./components/carousel/CenterCarousel";
+import PageNotFound from "./components/common/pageNotFound/PageNotFound";
 
 
 
