@@ -1,0 +1,25 @@
+@font-face {
+  font-family: 'Big Shoulders Display';
+  src: url('/fonts/big-shoulders-display.bold.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+@import "tailwindcss";
+
+@theme {
+  --color-secondary-btn: #FFC567;
+  --color-primary-btn: #FB7DA8;
+  --color-delete-btn: #FD5A46;
+  --color-col-one: #FFC567;
+  --color-col-two: #FB7DA8;
+  --color-col-three: #FD5A46;
+  --color-col-four: #A6FAFF;
+  --color-col-five: #00995E;
+  --color-col-six: #058CD7;
+  --color-col-seven: #A5B4FB;
+  --color-background: #FFF59F;
+  --color-expired: #666666;
+
+  --font-sans: "Big Shoulders Display", sans-serif;
+}
