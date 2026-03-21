@@ -1,13 +1,14 @@
-import type { FC } from "react";
+import { useId, type FC } from "react";
 import type { StarRatingProps } from "../../../types";
 import { numFormatterUS } from "../../../utils";
 
 const StarRating: FC<StarRatingProps> = ({
   rating,
-  reviews,
+  reviews = undefined,
   color = "#FFF59F",
   strokeColor = "#F8C315",
 }) => {
+  const uniqueId = useId();
   const validatedRating = Math.min(5, Math.max(0, rating));
 
   return (
@@ -28,7 +29,7 @@ const StarRating: FC<StarRatingProps> = ({
             <svg viewBox="0 0 24 24" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
               {/* Define a unique gradient for each star to handle partial fills */}
               <defs>
-                <linearGradient id={`grad-${index}`}>
+                <linearGradient id={`grad-${uniqueId}-${index}`}>
                   <stop offset={`${fillPercent}%`} stopColor={color} />
                   <stop offset={`${fillPercent}%`} stopColor="transparent" />
                 </linearGradient>
@@ -37,7 +38,7 @@ const StarRating: FC<StarRatingProps> = ({
               {/* The Star Path */}
               <path
                 d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                fill={`url(#grad-${index})`}
+                fill={`url(#grad-${uniqueId}-${index})`}
                 stroke={strokeColor}
                 strokeWidth="1.5"
                 strokeLinejoin="round"
@@ -46,8 +47,9 @@ const StarRating: FC<StarRatingProps> = ({
           </div>
         );
       })}
-
-      <div className="ml-2 text-md font-bold text-black">{numFormatterUS(reviews)}</div>
+      {reviews !== undefined && (
+        <div className="ml-2 text-md font-bold text-black">{numFormatterUS(reviews)}</div>
+      )}
     </div>
   );
 };

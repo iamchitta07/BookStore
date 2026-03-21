@@ -18,7 +18,7 @@ export interface TrendingBookProps {
 }
 
 export interface StarRatingProps {
-  reviews: number;
+  reviews?: number | undefined;
   rating: number;
   color?: string;
   strokeColor?: string;
@@ -30,4 +30,19 @@ export interface ButtonProps {
   icon: ReactElement;
   color: string;
   bgColor: string;
+}
+
+export interface VendorProps {
+    name: string;
+    sold: number;
+    rating: number;
+    rank: number;
+    href: string;
+    image: string;
+}
+
+export interface AccordinoProps {
+  title: string;
+  image: string;
+  href: string;
 }

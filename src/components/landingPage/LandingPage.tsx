@@ -1,10 +1,10 @@
-import TrendingBooks from "../layouts/treandingBooks/TrendingBooks";
+import TopVendors from "../layouts/topVendors/TopVendors";
 
 
 const LandingPage = () => {
   return (
     <div>
-      <TrendingBooks />
+      <TopVendors/>
     </div>
   );
 };
