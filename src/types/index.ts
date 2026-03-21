@@ -45,4 +45,5 @@ export interface AccordinoProps {
   title: string;
   image: string;
   href: string;
+  color: string;
 }

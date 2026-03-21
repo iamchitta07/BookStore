@@ -137,31 +137,37 @@ export const accordinoConst: AccordinoProps[] = [
   {
     title: "Sci-Fi",
     image: SCIFI,
-    href: "sci-fi"
+    href: "sci-fi",
+    color: "bg-acc-scifi",
   },
   {
     title: "Regligious",
     image: RELIGIOUS,
-    href: "regligious"
+    href: "regligious",
+    color: "bg-acc-religious",
   },
   {
     title: "Mystery, Thriller",
     image: MYSTERY,
-    href: "mystery"
+    href: "mystery",
+    color: "bg-acc-mystery",
   },
   {
     title: "Romance",
     image: ROMANCE,
-    href: "romanceRegligious"
+    href: "romanceRegligious",
+    color: "bg-acc-romance",
   },
   {
     title: "History",
     image: HISTORY,
-    href: "history"
+    href: "history",
+    color: "bg-acc-history",
   },
   {
     title: "Teen, Adults",
     image: TEEN,
-    href: "teen-adults"
-  }
+    href: "teen-adults",
+    color: "bg-acc-teen",
+  },
 ];

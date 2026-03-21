@@ -29,5 +29,12 @@
   --color-expired: #666666;
   --color-star-stroke: #F8C315;
 
+  --color-acc-scifi: #E67E22;
+  --color-acc-religious: #5DA9DD;
+  --color-acc-mystery: #7D829B;
+  --color-acc-romance: #A56461;
+  --color-acc-history: #C19770;
+  --color-acc-teen: #7FB3C2;
+
   --font-sans: "Big Shoulders Display", sans-serif;
 }

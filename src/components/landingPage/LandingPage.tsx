@@ -1,10 +1,10 @@
-import TopVendors from "../layouts/topVendors/TopVendors";
+import NavBar from "../layouts/navbar/NavBar";
 
 
 const LandingPage = () => {
   return (
     <div>
-      <TopVendors/>
+      <NavBar />
     </div>
   );
 };
