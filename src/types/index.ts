@@ -47,3 +47,51 @@ export interface AccordinoProps {
   href: string;
   color: string;
 }
+
+export interface CartProps {
+  title: string;
+  des: string;
+  inStock: boolean;
+  price: number;
+  off: number;
+  qnty: number;
+  image: string;
+  selected: boolean;
+}
+
+export interface InputFieldProps {
+  title: string;
+  type: string;
+  placeholder: string;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export interface PasswordProps {
+  title: string;
+  showPassword: boolean;
+  setShowPassword: (value: boolean) => void;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export interface CheckBoxProps {
+  agreed: boolean;
+  setAgreed: (value: boolean) => void;
+  children: ReactElement;
+}
+
+export interface ProductCardProps {
+  imageUrl: string;
+  title: string;
+  rating: number;
+  totalReviews: number;
+  author: string;
+  originalPrice: number;
+  off: number;
+  isWishlisted: boolean;
+  onWishlistClick: () => void;
+  onAddToCart: () => void;
+  onBuyNow: () => void;
+  stockLeft?: number;
+}

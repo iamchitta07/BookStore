@@ -10,7 +10,7 @@ const SUGGESTIONS = [
   "Server Components guide",
 ];
 
-export default function SearchBar() {
+const SearchBar = () => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<string[]>([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -95,3 +95,4 @@ export default function SearchBar() {
     </div>
   );
 }
+export default SearchBar;

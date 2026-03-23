@@ -8,9 +8,10 @@ interface SqBtnProps {
   children: ReactNode;
   color: string;
   href: string;
+  onClick?: React.MouseEventHandler<HTMLAnchorElement>;
 }
 
-const SqBtn: FC<SqBtnProps> = ({ count = undefined, children, color, href }) => {
+const SqBtn: FC<SqBtnProps> = ({ count = undefined, children, color, href, onClick }) => {
   const rgbCol = hexToRgb(color);
   console.log(color);
   const [handleHover, setHandleHover] = useState<boolean>(false);
@@ -19,24 +20,26 @@ const SqBtn: FC<SqBtnProps> = ({ count = undefined, children, color, href }) => 
     ? [
         {
           backgroundColor: color,
-          boxShadow: `3px 3px 0px ${rgbCol}`,
+          boxShadow: `0px 0px 0px ${rgbCol}`,
         },
-        { boxShadow: `2px 1px 0px ${rgbCol}` },
+        {},
       ]
     : [
         {
           backgroundColor: color,
+          boxShadow: `3px 3px 0px ${rgbCol}`,
         },
-        {},
+        { boxShadow: `2px 2px 0px ${rgbCol}` },
       ];
 
   return (
     <Link
       to={href}
-      className={`h-12 w-12 border-2 relative flex justify-center items-center duration-300`}
+      className={`h-12 w-12 border-2 relative flex justify-center items-center duration-200 hover:translate-0.75`}
       onMouseEnter={() => setHandleHover(true)}
       onMouseLeave={() => setHandleHover(false)}
       style={mainStyle[0]}
+      onClick={onClick}
     >
       {count !== undefined && (
         <div
