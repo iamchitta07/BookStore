@@ -13,7 +13,15 @@ import UserPage from "./components/userPage/UserPage";
 
 import ProtectedRoute from "./routes/ProtectedRoute";
 
+import AdminRoute from "./routes/AdminRoute";
+import Admin from "./components/admin/Admin";
+import Sell from "./components/sell/Sell";
+
 const router = createBrowserRouter([
+  {
+    path: "/404",
+    element: <PageNotFound />
+  },
   {
     path: "/login",
     element: <Login />,
@@ -35,6 +43,13 @@ const router = createBrowserRouter([
           {path: 'wishlist', element: <WishList />},
           {path: 'cart', element: <Cart />},
           {path: 'user', element: <UserPage />},
+          {
+            element: <AdminRoute />,
+            children: [
+              { path: 'admin', element: <Admin /> },
+              { path: 'sell', element: <Sell /> }
+            ]
+          }
         ]
       }
     ]

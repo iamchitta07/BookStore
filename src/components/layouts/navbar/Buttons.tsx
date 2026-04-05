@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import api from "../../../services/axios";
+import { useEffect } from "react";
 import { IoMdCart } from "react-icons/io";
 import { FaHeart } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
@@ -8,6 +7,7 @@ import { FaPowerOff } from "react-icons/fa";
 import SqBtn from "../../common/buttons/SqBtn";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../features/auth/authSlice";
+import { fetchShopCounts, setCartCount, setWishlistCount } from "../../../features/shop/shopSlice";
 import type { AppDispatch, RootState } from "../../../app/store";
 
 const cols: string[] = ["#A6FAFF", "#FB7DA8", "#A5B4FB", "#FD5A46"];
@@ -15,38 +15,17 @@ const cols: string[] = ["#A6FAFF", "#FB7DA8", "#A5B4FB", "#FD5A46"];
 const Buttons = () => {
   const dispatch = useDispatch<AppDispatch>();
   const token = useSelector((state: RootState) => state.auth.token);
+  const { cartCount, wishlistCount } = useSelector((state: RootState) => state.shop);
   
-  const [cartCount, setCartCount] = useState(0);
-  const [wishlistCount, setWishlistCount] = useState(0);
-
   useEffect(() => {
     if (!token) {
-      setCartCount(0);
-      setWishlistCount(0);
+      dispatch(setCartCount(0));
+      dispatch(setWishlistCount(0));
       return;
     }
 
-    const fetchCounts = async () => {
-      try {
-        const [cartRes, wishRes] = await Promise.all([
-          api.get("/sales/cart"),
-          api.get("/favourites/")
-        ]);
-        
-        if (cartRes.data && Array.isArray(cartRes.data.items)) {
-          setCartCount(cartRes.data.items.length);
-        }
-        
-        if (Array.isArray(wishRes.data)) {
-          setWishlistCount(wishRes.data.length);
-        }
-      } catch (error) {
-        console.error("Failed to fetch notification counts", error);
-      }
-    };
-    
-    fetchCounts();
-  }, [token]);
+    dispatch(fetchShopCounts());
+  }, [token, dispatch]);
 
   const handleLogout = () => {
     dispatch(logout());

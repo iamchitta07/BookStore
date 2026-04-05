@@ -3,8 +3,12 @@ import api from "../../services/axios";
 import GenreDropdown from "./DropDown";
 import ProductCard from "../common/bookCard/ProductCard";
 import type { FavouriteResponse } from "../../types";
+import { useDispatch } from "react-redux";
+import { fetchShopCounts } from "../../features/shop/shopSlice";
+import type { AppDispatch } from "../../app/store";
 
 const WishList = () => {
+  const dispatch = useDispatch<AppDispatch>();
   const [favourites, setFavourites] = useState<FavouriteResponse[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
@@ -14,6 +18,7 @@ const WishList = () => {
       try {
         const response = await api.get("/favourites/");
         setFavourites(response.data);
+        dispatch(fetchShopCounts());
       } catch (error) {
         console.error("Failed to fetch favourites", error);
         alert("Failed to load wishlist.");
@@ -22,12 +27,13 @@ const WishList = () => {
       }
     };
     fetchFavourites();
-  }, []);
+  }, [dispatch]);
 
   const handleRemoveFavourite = async (id: number) => {
     try {
       await api.delete(`/favourites/${id}`);
       setFavourites(favourites.filter((fav) => fav.id !== id));
+      dispatch(fetchShopCounts());
     } catch (error) {
       console.error("Failed to remove favourite", error);
       alert("Failed to remove from wishlist.");
@@ -38,6 +44,7 @@ const WishList = () => {
     try {
       await api.post("/sales/", { book_id: bookId, quantity: 1 });
       alert("Added to cart successfully!");
+      dispatch(fetchShopCounts());
     } catch (error: any) {
       console.error("Failed to add to cart", error);
       alert(error.response?.data?.detail || "Failed to add to cart.");

@@ -19,7 +19,7 @@ const Accordino = () => {
               onMouseEnter={() => setActiveIndex(index)}
               className={`
                 relative cursor-pointer overflow-hidden no-underline
-                transition-all duration-500 ease-in-out
+                transition-all duration-200 ease-in-out
                 ${panel.color}
                 ${!isLast ? "border-r-5 border-black" : ""}
                 ${isActive ? "flex-5" : "flex-2"}
@@ -29,7 +29,7 @@ const Accordino = () => {
               <div
                 className={`
                   absolute inset-0 bg-cover bg-bottom bg-no-repeat
-                  transition-opacity duration-500
+                  transition-opacity
                   ${isActive ? "opacity-100" : "opacity-0 pointer-events-none"}
                 `}
                 style={{ backgroundImage: `url(${panel.image})` }}
@@ -43,7 +43,7 @@ const Accordino = () => {
               <div
                 className={`
                   absolute inset-0 flex items-center justify-center
-                  transition-opacity duration-500
+                  transition-opacity
                   ${isActive ? "opacity-0 pointer-events-none" : "opacity-100"}
                 `}
               >

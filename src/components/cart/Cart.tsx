@@ -5,9 +5,13 @@ import CartCard from "./CartCard";
 import IMG from "/images/Product.webp";
 import { numFormatterUS } from "../../utils";
 import type { BackendCartItemProps } from "../../types";
+import { useDispatch } from "react-redux";
+import { fetchShopCounts } from "../../features/shop/shopSlice";
+import type { AppDispatch } from "../../app/store";
 
 const Cart = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
   const [cartItems, setCartItems] = useState<BackendCartItemProps[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedIds, setSelectedIds] = useState<Set<number>>(new Set());
@@ -17,6 +21,7 @@ const Cart = () => {
       try {
         const res = await api.get("/sales/cart");
         setCartItems(res.data.items || []);
+        dispatch(fetchShopCounts());
       } catch (error) {
         console.error("Failed to fetch cart", error);
       } finally {
@@ -24,7 +29,7 @@ const Cart = () => {
       }
     };
     fetchCart();
-  }, []);
+  }, [dispatch]);
 
   const handleUpdateQuantity = async (id: number, newQnty: number) => {
     if (newQnty < 0) return;
@@ -42,6 +47,7 @@ const Cart = () => {
           newSet.delete(id);
           return newSet;
         });
+        dispatch(fetchShopCounts());
       } else {
         const res = await api.put(`/sales/cart/${id}`, { quantity: newQnty });
         setCartItems(prev =>
@@ -62,6 +68,7 @@ const Cart = () => {
         newSet.delete(id);
         return newSet;
       });
+      dispatch(fetchShopCounts());
     } catch (error) {
       console.error("Failed to remove cart item", error);
     }
