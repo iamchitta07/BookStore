@@ -84,8 +84,9 @@ export interface CheckBoxProps {
 export interface ProductCardProps {
   imageUrl: string;
   title: string;
-  rating: number;
-  totalReviews: number;
+  rating?: number;
+  totalReviews?: number;
+  isbn: string;
   author: string;
   originalPrice: number;
   off: number;
@@ -128,4 +129,28 @@ export interface UserData {
   address: string;
   role: string;
   username: string;
+}
+
+export interface BookResponse {
+  id: number;
+  isbn: string;
+  title: string;
+  author: string;
+  publisher: string;
+  edition?: string;
+  publication_year?: number;
+  price: number;
+  category: string[];
+  description?: string;
+  cover_image_url?: string;
+  discount_percentage?: number;
+  stock_quantity: number;
+  admin_id?: number;
+}
+
+export interface FavouriteResponse {
+  id: number;
+  book_id: number;
+  user_id: number;
+  book: BookResponse;
 }

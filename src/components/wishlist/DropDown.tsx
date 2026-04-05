@@ -1,11 +1,14 @@
 import { useState, type FC } from "react";
-import { LuChevronDown } from "react-icons/lu"; // Using Lucide version of icons
+import { LuChevronDown } from "react-icons/lu";
 
-const GenreDropdown: FC = () => {
+interface GenreDropdownProps {
+  options: string[];
+  selected: string;
+  onChange: (selected: string) => void;
+}
+
+const GenreDropdown: FC<GenreDropdownProps> = ({ options, selected, onChange }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [selected, setSelected] = useState<string>("All");
-
-  const options: string[] = ["Comedy", "Action", "Thrillers", "Mythology", "History"];
 
   return (
     <div className="w-full flex justify-center mt-10">
@@ -14,7 +17,7 @@ const GenreDropdown: FC = () => {
         <h1 className="uppercase text-start font-bold text-2xl">Category</h1>
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className={`flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-black bg-secondary-btn hover:shadow-[3px_3px_0px_rgba(255,197,103,1)] ${isOpen && "shadow-[3px_3px_0px_rgba(255,197,103,1)]"} border-2`}
+          className={`flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-black bg-secondary-btn hover:shadow-[3px_3px_0px_rgba(255,197,103,1)] ${isOpen ? "shadow-[3px_3px_0px_rgba(255,197,103,1)]" : ""} border-2`}
         >
           <span className="text-center text-xl">{selected}</span>
           <LuChevronDown
@@ -29,7 +32,7 @@ const GenreDropdown: FC = () => {
               {/* "All" Option */}
               <button
                 onClick={() => {
-                  setSelected("All");
+                  onChange("All");
                   setIsOpen(false);
                 }}
                 className="block w-full px-4 py-2 text-center text-xl text-black hover:bg-gray-100"
@@ -42,7 +45,7 @@ const GenreDropdown: FC = () => {
                 <button
                   key={option}
                   onClick={() => {
-                    setSelected(option);
+                    onChange(option);
                     setIsOpen(false);
                   }}
                   className="block w-full px-4 py-2 text-center text-xl text-black hover:bg-gray-100"

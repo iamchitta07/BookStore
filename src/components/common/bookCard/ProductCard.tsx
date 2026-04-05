@@ -1,15 +1,16 @@
 import type { FC } from "react";
-import { FaStar, FaRegStar, FaHeart, FaRegHeart, FaBolt } from "react-icons/fa";
+import { FaHeart, FaRegHeart, FaBolt } from "react-icons/fa";
 import { IoMdCart } from "react-icons/io";
 import type { ProductCardProps } from "../../../types";
 import { offPrice } from "../../../utils";
-import StarRating from "../ratingComp/StarRating";
+// import StarRating from "../ratingComp/StarRating";
 
 const ProductCard: FC<ProductCardProps> = ({
   imageUrl,
   title,
   rating,
   totalReviews,
+  isbn = '',
   author,
   originalPrice,
   off,
@@ -53,7 +54,13 @@ const ProductCard: FC<ProductCardProps> = ({
         </h3>
 
         {/* Rating Row */}
-        <StarRating rating={rating} reviews={totalReviews} />
+        {/* <StarRating rating={rating} reviews={totalReviews} /> */}
+        <h3
+          className="text-[12px] text-black leading-tight truncate w-full"
+          title={isbn}
+        >
+          ISBN: {isbn}
+        </h3>
 
         {/* Author */}
         <p className="text-[10px] text-black mt-1 truncate w-full leading-none" title={author}>
