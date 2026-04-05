@@ -13,7 +13,6 @@ interface SqBtnProps {
 
 const SqBtn: FC<SqBtnProps> = ({ count = undefined, children, color, href, onClick }) => {
   const rgbCol = hexToRgb(color);
-  console.log(color);
   const [handleHover, setHandleHover] = useState<boolean>(false);
 
   const mainStyle: CSSProperties[] = handleHover

@@ -34,6 +34,16 @@ const WishList = () => {
     }
   };
 
+  const handleAddToCart = async (bookId: number) => {
+    try {
+      await api.post("/sales/", { book_id: bookId, quantity: 1 });
+      alert("Added to cart successfully!");
+    } catch (error: any) {
+      console.error("Failed to add to cart", error);
+      alert(error.response?.data?.detail || "Failed to add to cart.");
+    }
+  };
+
   // Get unique categories
   const categories = Array.from(
     new Set(favourites.flatMap((fav) => fav.book.category || []))
@@ -53,7 +63,7 @@ const WishList = () => {
   }
 
   return (
-    <div className="min-h-screen py-16">
+    <div className="w-full px-20 py-16">
       <div className="max-w-7xl mx-auto px-4">
         {/* Header Section */}
         <div className="mb-12 text-center pb-2 gap-2 flex flex-col items-center">
@@ -79,7 +89,7 @@ const WishList = () => {
               off={fav.book.discount_percentage || 0}
               isWishlisted={true}
               onWishlistClick={() => handleRemoveFavourite(fav.id)}
-              onAddToCart={() => {}}
+              onAddToCart={() => handleAddToCart(fav.book.id)}
               onBuyNow={() => {}}
               isbn={fav.book.isbn}
             />

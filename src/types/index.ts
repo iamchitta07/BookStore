@@ -49,14 +49,19 @@ export interface AccordinoProps {
 }
 
 export interface CartProps {
+  id: number;
+  publisher: string;
   title: string;
-  des: string;
+  isbn: string;
   inStock: boolean;
   price: number;
   off: number;
   qnty: number;
   image: string;
   selected: boolean;
+  onUpdateQuantity: (id: number, newQnty: number) => void;
+  onRemove: (id: number) => void;
+  onToggleSelection?: (id: number, isSelected: boolean) => void;
 }
 
 export interface InputFieldProps {
@@ -153,4 +158,19 @@ export interface FavouriteResponse {
   book_id: number;
   user_id: number;
   book: BookResponse;
+}
+
+export interface BackendCartItemProps {
+  id: number;
+  book_id: number;
+  quantity: number;
+  book: {
+    title: string;
+    isbn: string;
+    publisher: string;
+    price: number;
+    discount_percentage: number;
+    stock_quantity: number;
+    cover_image_url: string;
+  };
 }
