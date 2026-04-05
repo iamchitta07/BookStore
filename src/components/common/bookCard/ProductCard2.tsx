@@ -3,14 +3,13 @@ import { FaHeart, FaRegHeart, FaBolt } from "react-icons/fa";
 import { IoMdCart } from "react-icons/io";
 import type { ProductCardProps } from "../../../types";
 import { offPrice } from "../../../utils";
-import StarRating from "../ratingComp/StarRating";
-import IMG from "/images/Product.webp";
+import { Link } from "react-router-dom";
 
 const ProductCard2: FC<ProductCardProps> = ({
-  imageUrl = IMG,
+  id,
+  imageUrl,
   title,
-  rating,
-  totalReviews,
+  isbn,
   author,
   originalPrice,
   off,
@@ -26,7 +25,10 @@ const ProductCard2: FC<ProductCardProps> = ({
   };
 
   return (
-    <div className="pl-1 pr-2 h-46.5 rounded-lg bg-white border border-black hover:shadow-[2px_2px_0px_#000] shadow-none hover:translate-0.5 duration-200 font-sans flex">
+    <Link
+      to={`/product/${id}`}
+      className="pl-1 pr-2 h-46.5 rounded-lg bg-white border border-black hover:shadow-[4px_4px_0px_#000] shadow-none hover:translate-0.5 duration-200 font-sans flex"
+    >
       {/* Left side: Image Container */}
       <div className="p-1.5 pr-2.5 py-2.5 border-r border-black shrink-0">
         <div className="w-30 rounded-md overflow-hidden h-41 bg-white border border-black duration-200 hover:shadow-[2px_2px_0px_#000] relative group">
@@ -54,8 +56,10 @@ const ProductCard2: FC<ProductCardProps> = ({
         </h3>
 
         {/* Rating Row */}
-        <div className="mt-1 transform scale-75 origin-left">
-          <StarRating rating={rating} reviews={totalReviews} />
+        <div className="mt-1">
+          <h1>
+            ISBN: <span>{isbn}</span>
+          </h1>
         </div>
 
         {/* Author */}
@@ -65,9 +69,7 @@ const ProductCard2: FC<ProductCardProps> = ({
 
         {/* Price Row */}
         <div className="flex items-center gap-1 mt-2.5">
-          <span className="text-md font-bold text-black leading-none">
-            {formatCurrency(price)}
-          </span>
+          <span className="text-md font-bold text-black leading-none">{formatCurrency(price)}</span>
           <span className="text-xs font-bold text-expired line-through leading-none">
             {formatCurrency(originalPrice)}
           </span>
@@ -106,7 +108,7 @@ const ProductCard2: FC<ProductCardProps> = ({
           </button>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

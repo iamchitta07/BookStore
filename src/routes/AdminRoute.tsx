@@ -14,7 +14,7 @@ const AdminRoute = () => {
         } else {
           setIsAdmin(false);
         }
-      } catch (error) {
+      } catch (err: any) {
         setIsAdmin(false);
       }
     };

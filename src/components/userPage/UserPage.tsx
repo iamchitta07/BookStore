@@ -83,7 +83,7 @@ const UserPage = () => {
       <div className="max-w-7xl mx-auto px-4">
           {/* Header Section */}
           <div className="mb-12 text-center pb-2 gap-2 flex flex-col items-center">
-            <h1 className="text-5xl font-black relative inline-block">
+            <h1 className="text-5xl font-black relative inline-block font-sans uppercase">
               Login and Security
             </h1>
             <h2 className="text-3xl font-black mt-2 tracking-wide">

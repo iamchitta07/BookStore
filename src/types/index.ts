@@ -87,18 +87,17 @@ export interface CheckBoxProps {
 }
 
 export interface ProductCardProps {
+  id: number;
   imageUrl: string;
   title: string;
-  rating?: number;
-  totalReviews?: number;
   isbn: string;
   author: string;
   originalPrice: number;
   off: number;
   isWishlisted: boolean;
-  onWishlistClick: () => void;
-  onAddToCart: () => void;
-  onBuyNow: () => void;
+  onWishlistClick?: () => void;
+  onAddToCart?: () => void;
+  onBuyNow?: () => void;
   stockLeft?: number;
 }
 

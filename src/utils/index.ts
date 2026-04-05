@@ -69,3 +69,30 @@ export const hexToRgb = (hex: string): string => {
 export const colorByRank = (rnk: number): string => {
   return hexToRgb(colors[rnk - 1]);
 };
+
+/**
+ * Calculates the time remaining until the next Monday at 00:00:00.
+ * Returns a string formatted as d:hh:mm:ss.
+ */
+export const getCountdownToMonday = (): string => {
+  const now = new Date();
+
+  const currentDay = now.getDay();
+
+  const daysUntilMonday = (1 - currentDay + 7) % 7 || 7;
+
+  const target = new Date(now);
+  target.setDate(now.getDate() + daysUntilMonday);
+  target.setHours(0, 0, 0, 0);
+
+  const diffInMs = target.getTime() - now.getTime();
+
+  const seconds = Math.floor((diffInMs / 1000) % 60);
+  const minutes = Math.floor((diffInMs / (1000 * 60)) % 60);
+  const hours = Math.floor((diffInMs / (1000 * 60 * 60)) % 24);
+  const days = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+
+  const pad = (num: number) => num.toString().padStart(2, "0");
+
+  return `${days}:${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+};
