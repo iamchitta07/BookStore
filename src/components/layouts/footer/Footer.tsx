@@ -25,7 +25,7 @@ const socialLinks = [
 
 const Footer = () => {
   return (
-    <footer className="w-screen bg-black px-6 pt-2 pb-6">
+    <footer className="w-full bg-black px-6 pt-2 pb-6">
       {/* Main bordered container */}
       <div className="w-full border-secondary-btn px-6 py-6 sm:px-10 md:px-14">
         <div className="flex justify-between items-end">

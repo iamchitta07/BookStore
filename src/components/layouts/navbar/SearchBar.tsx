@@ -75,7 +75,7 @@ const SearchBar = () => {
 
         {/* Suggestions Dropdown */}
         {isOpen && results.length > 0 && (
-          <ul className="absolute mt-2 w-full overflow-hidden border border-black bg-background shadow-[2px_2px_0px_rgba(0,0,0,1)] bg-backgroud fade-in slide-in-from-top-1">
+          <ul className="z-10 absolute mt-2 w-full overflow-hidden border border-black bg-background shadow-[2px_2px_0px_rgba(0,0,0,1)] bg-backgroud fade-in slide-in-from-top-1">
             {results.map((suggestion, index) => (
               <li key={index}>
                 <button

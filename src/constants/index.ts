@@ -1,12 +1,18 @@
-import { BookIMG, UserIMG, HISTORY, MYSTERY, RELIGIOUS, ROMANCE, SCIFI, TEEN } from "./IMAGES";
-import type { UnderNavProps, TrendingBookProps, VendorProps, AccordinoProps } from "../types";
+import { BookIMG, UserIMG, ACCORDINO, CAROUSEL } from "./IMAGES";
+import type {
+  UnderNavProps,
+  TrendingBookProps,
+  VendorProps,
+  AccordinoProps,
+  CentralCarouselProps,
+} from "../types";
 
 export const colors: string[] = ["#FD5A46", "#FB7DA8", "#A6FAFF", "#A5B4FB", "#058CD7"];
 
 export const underNavEle: UnderNavProps[] = [
   {
-    title: "Your Account",
-    href: "acc",
+    title: "Admin",
+    href: "admin",
   },
   {
     title: "Sell Book",
@@ -136,38 +142,77 @@ export const topVendor: VendorProps[] = [
 export const accordinoConst: AccordinoProps[] = [
   {
     title: "Sci-Fi",
-    image: SCIFI,
+    image: ACCORDINO.SCIFI,
     href: "sci-fi",
     color: "bg-acc-scifi",
   },
   {
-    title: "Regligious",
-    image: RELIGIOUS,
+    title: "Mythology",
+    image: ACCORDINO.MYTHOLOGY,
     href: "regligious",
     color: "bg-acc-religious",
   },
   {
-    title: "Mystery, Thriller",
-    image: MYSTERY,
+    title: "Mystery",
+    image: ACCORDINO.MYSTERY,
     href: "mystery",
     color: "bg-acc-mystery",
   },
   {
     title: "Romance",
-    image: ROMANCE,
+    image: ACCORDINO.ROMANCE,
     href: "romanceRegligious",
     color: "bg-acc-romance",
   },
   {
     title: "History",
-    image: HISTORY,
+    image: ACCORDINO.HISTORY,
     href: "history",
     color: "bg-acc-history",
   },
   {
     title: "Teen, Adults",
-    image: TEEN,
+    image: ACCORDINO.TEEN,
     href: "teen-adults",
     color: "bg-acc-teen",
+  },
+];
+
+export const centralCarousel: CentralCarouselProps[] = [
+  {
+    title: "Fantasy",
+    tagline: "DEFY REALITY. ENTER THE UNKNOWN.",
+    img: CAROUSEL.FANTASY,
+    url: "/fantasy",
+  },
+  {
+    title: "Horror",
+    tagline: "FACE YOUR FEARS.READ IF YOU DARE.",
+    img: CAROUSEL.HORROR,
+    url: "/horror",
+  },
+  {
+    title: "Action & Adventure",
+    tagline: "FEEL THE RUSH. CONQUER THE WORLD.",
+    img: CAROUSEL.ACTION,
+    url: "/action",
+  },
+  {
+    title: "Biography & Memoir",
+    tagline: "REAL LIVES. RAW STORIES.",
+    img: CAROUSEL.BIOGRAPHY,
+    url: "/biography",
+  },
+  {
+    title: "Comedy & Humor",
+    tagline: "LIGHTEN UP. LAUGH IT OFF.",
+    img: CAROUSEL.COMEDY,
+    url: "/comedy",
+  },
+  {
+    title: "Comics Guide",
+    tagline: "FIND THE PERFECT COMIC BOOK FOR YOURSELF",
+    img: CAROUSEL.COMICS,
+    url: "/comics",
   },
 ];

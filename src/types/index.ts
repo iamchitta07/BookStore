@@ -1,20 +1,20 @@
-import type { ReactElement } from "react";
+import type { ReactElement, MouseEventHandler } from "react";
 
 export interface UnderNavProps {
-    title: string;
-    href: string;
+  title: string;
+  href: string;
 }
 
 export interface TrendingBookProps {
-    image: string;
-    title: string;
-    shortSummary: string;
-    rating: number;
-    totalReviews: number;
-    price: number;
-    off: number;
-    href: string;
-    category: string[];
+  image: string;
+  title: string;
+  shortSummary: string;
+  rating: number;
+  totalReviews: number;
+  price: number;
+  off: number;
+  href: string;
+  category: string[];
 }
 
 export interface StarRatingProps {
@@ -33,12 +33,12 @@ export interface ButtonProps {
 }
 
 export interface VendorProps {
-    name: string;
-    sold: number;
-    rating: number;
-    rank: number;
-    href: string;
-    image: string;
+  name: string;
+  sold: number;
+  rating: number;
+  rank: number;
+  href: string;
+  image: string;
 }
 
 export interface AccordinoProps {
@@ -94,4 +94,38 @@ export interface ProductCardProps {
   onAddToCart: () => void;
   onBuyNow: () => void;
   stockLeft?: number;
+}
+
+export interface CentralCarouselProps {
+  img: string;
+  url?: string;
+  tagline?: string;
+  title?: string;
+}
+
+export interface NavigateBtnProps {
+  onClickFn: MouseEventHandler;
+  children: ReactElement;
+  className: string;
+  aralLabel: string;
+}
+
+export interface InputUserProps {
+  label: string;
+  name: string;
+  value: string | undefined;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  disabled?: boolean;
+  color?: string;
+  type?: string | undefined;
+}
+
+export interface UserData {
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone_number: string;
+  address: string;
+  role: string;
+  username: string;
 }

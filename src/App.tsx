@@ -9,8 +9,7 @@ import WishList from "./components/wishlist/WishList";
 import Cart from "./components/cart/Cart";
 import Login from "./components/loginPage/Login";
 import Signup from "./components/signup/Signup";
-
-
+import UserPage from "./components/userPage/UserPage";
 
 import ProtectedRoute from "./routes/ProtectedRoute";
 
@@ -35,6 +34,7 @@ const router = createBrowserRouter([
           {index: true, element: <LandingPage /> },
           {path: 'wishlist', element: <WishList />},
           {path: 'cart', element: <Cart />},
+          {path: 'user', element: <UserPage />},
         ]
       }
     ]
