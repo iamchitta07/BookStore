@@ -2,18 +2,16 @@ import type { FC } from "react";
 import { Link } from "react-router-dom";
 import type { TrendingBookProps } from "../../../types";
 
-import StarRating from "../ratingComp/StarRating";
 import PriceTag from "../priceTag/PriceTag";
 
 const BookCard: FC<TrendingBookProps> = ({
   image,
   title,
-  shortSummary,
-  rating,
-  totalReviews,
+  author,
   price,
   off,
   href,
+  isbn,
   category,
 }) => {
   return (
@@ -30,8 +28,8 @@ const BookCard: FC<TrendingBookProps> = ({
       </div>
       <div className="pl-2 col-span-2 flex flex-col my-auto">
         <h1 className="text-xl font-bold">{title}</h1>
-        <StarRating reviews={totalReviews} rating={rating} />
-        <p className="text-[10px]">{shortSummary}</p>
+        <p className="text-[10px]">{author}</p>
+        <p className="text-[8px]">{isbn}</p>
         <PriceTag price={price} off={off} />
         <div className="flex gap-1">
           {category.map((ele, idx) => (

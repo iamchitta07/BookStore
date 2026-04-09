@@ -8,11 +8,10 @@ export interface UnderNavProps {
 export interface TrendingBookProps {
   image: string;
   title: string;
-  shortSummary: string;
-  rating: number;
-  totalReviews: number;
+  author: string;
   price: number;
   off: number;
+  isbn: string;
   href: string;
   category: string[];
 }
@@ -33,12 +32,9 @@ export interface ButtonProps {
 }
 
 export interface VendorProps {
-  name: string;
+  username: string;
   sold: number;
-  rating: number;
   rank: number;
-  href: string;
-  image: string;
 }
 
 export interface AccordinoProps {

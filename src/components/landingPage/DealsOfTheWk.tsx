@@ -1,86 +1,94 @@
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import ProductCard2 from "../common/bookCard/ProductCard2";
-import type { ProductCardProps } from "../../types";
-
-const data: ProductCardProps[] = [
-  {
-    isbn: "9780385742801",
-    title: "Tether",
-    author: "Anna Jarzab",
-    originalPrice: 1262.3,
-    imageUrl:
-      "https://books.google.com/books/content?id=G_kBDAAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
-    off: 20,
-    id: 23,
-    stockLeft: 63,
-    isWishlisted: false,
-  },
-  {
-    isbn: "9780553260199",
-    title: "The Holcroft Covenant",
-    author: "Robert Ludlum",
-    originalPrice: 1868.45,
-    imageUrl:
-      "https://books.google.com/books/content?id=afSBdDkZTgkC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
-    off: 20,
-    id: 24,
-    stockLeft: 94,
-    isWishlisted: false,
-  },
-  {
-    isbn: "9780226502625",
-    title: "Mythistory",
-    author: "Joseph Mali",
-    originalPrice: 1693.42,
-    imageUrl:
-      "https://books.google.com/books/content?id=aX6Cx2ncsWsC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-    off: 20,
-    id: 11,
-    stockLeft: 100,
-    isWishlisted: false,
-  },
-  {
-    isbn: "9780857500069",
-    title: "Tripwire",
-    author: "Lee Child",
-    originalPrice: 844.46,
-    imageUrl:
-      "https://books.google.com/books/content?id=MBtctNppOJAC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
-    off: 20,
-    id: 25,
-    stockLeft: 29,
-    isWishlisted: false,
-  },
-  {
-    isbn: "9780857500069",
-    title: "Tripwire",
-    author: "Lee Child",
-    originalPrice: 844.46,
-    imageUrl:
-      "https://books.google.com/books/content?id=MBtctNppOJAC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
-    off: 20,
-    id: 25,
-    stockLeft: 29,
-    isWishlisted: false,
-  },
-  {
-    isbn: "9780752858548",
-    title: "The Bourne Identity",
-    author: "Robert Ludlum",
-    originalPrice: 1343.08,
-    imageUrl:
-      "https://books.google.com/books/content?id=Jp1hPwAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
-    off: 20,
-    id: 34,
-    stockLeft: 36,
-    isWishlisted: false,
-  },
-];
+import type { FavouriteResponse } from "../../types";
+import api from "../../services/axios";
+import { fetchShopCounts } from "../../features/shop/shopSlice";
+import type { AppDispatch, RootState } from "../../app/store";
 
 const DealsOfTheWk = () => {
+  const { bestDeals, bestDealsLoading, bestDealsError } = useSelector((state: RootState) => state.books);
+  const { wishlistMap } = useSelector((state: RootState) => state.shop);
+  
+  const [cartLoadingId, setCartLoadingId] = useState<number | null>(null);
+  const [wishLoadingId, setWishLoadingId] = useState<number | null>(null);
+  const dispatch = useDispatch<AppDispatch>();
+
+  const books = bestDeals.slice(0, 6); // Take first 6 for deals of the week
+
+  const handleWishlistToggle = async (bookId: number) => {
+    if (wishLoadingId === bookId) return;
+    setWishLoadingId(bookId);
+    try {
+      if (wishlistMap[bookId] !== undefined) {
+        await api.delete(`/favourites/${wishlistMap[bookId]}`);
+      } else {
+        await api.post<FavouriteResponse>("/favourites/", { book_id: bookId });
+      }
+      dispatch(fetchShopCounts());
+    } catch (err: any) {
+      alert(err.response?.data?.detail || "Failed to update wishlist");
+    } finally {
+      setWishLoadingId(null);
+    }
+  };
+
+  const handleAddToCart = async (bookId: number) => {
+    if (cartLoadingId === bookId) return;
+    setCartLoadingId(bookId);
+    try {
+      await api.post("/sales/", { book_id: bookId, quantity: 1 });
+      dispatch(fetchShopCounts());
+      alert("Added to Cart!");
+    } catch (err: any) {
+      alert(err.response?.data?.detail || "Failed to add to cart");
+    } finally {
+      setCartLoadingId(null);
+    }
+  };
+
+  if (bestDealsLoading) {
+    return (
+      <div className="w-[95%] border-2 rounded-xl p-4 h-64 flex items-center justify-center">
+        <div className="flex flex-col items-center gap-3">
+          <div className="w-8 h-8 border-3 border-black border-t-transparent rounded-full animate-spin" />
+          <span className="text-sm font-semibold text-gray-500">Loading deals...</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (bestDealsError) {
+    return (
+      <div className="w-[95%] border-2 rounded-xl p-4 h-64 flex items-center justify-center">
+        <span className="text-col-three font-bold">{bestDealsError}</span>
+      </div>
+    );
+  }
+
   return (
-    <div className="w-[90%] border-2 rounded-xl grid grid-cols-2 gap-4 p-4">
-      {data.map((item) => (
-        <ProductCard2 key={item.id} {...item} />
+    <div className="w-[95%] border-2 rounded-xl grid grid-cols-2 gap-4 p-4">
+      {books.map((book) => (
+        <ProductCard2
+          key={book.id}
+          id={book.id}
+          isbn={book.isbn}
+          title={book.title}
+          author={book.author}
+          originalPrice={book.price}
+          off={book.discount_percentage ?? 0}
+          imageUrl={
+            book.cover_image_url
+              ? book.cover_image_url.startsWith("http")
+                ? book.cover_image_url
+                : `http://localhost:8000${book.cover_image_url}`
+              : "https://via.placeholder.com/150x200?text=No+Cover"
+          }
+          isWishlisted={wishlistMap[book.id] !== undefined}
+          stockLeft={book.stock_quantity}
+          onWishlistClick={() => handleWishlistToggle(book.id)}
+          onAddToCart={() => handleAddToCart(book.id)}
+        />
       ))}
     </div>
   );

@@ -25,8 +25,8 @@ const ProductCard2: FC<ProductCardProps> = ({
   };
 
   return (
-    <Link
-      to={`/product/${id}`}
+    <div
+      // to={`/product/${id}`}
       className="pl-1 pr-2 h-46.5 rounded-lg bg-white border border-black hover:shadow-[4px_4px_0px_#000] shadow-none hover:translate-0.5 duration-200 font-sans flex"
     >
       {/* Left side: Image Container */}
@@ -36,7 +36,7 @@ const ProductCard2: FC<ProductCardProps> = ({
           {/* Wishlist Button */}
           <button
             onClick={onWishlistClick}
-            className="absolute top-1.5 right-1.5 flex items-center justify-center transition-transform hover:scale-110 active:scale-95 z-10"
+            className="absolute top-1.5 right-1.5 flex items-center justify-center transition-transform hover:scale-110 active:scale-95 z-100"
             aria-label="Wishlist"
           >
             {isWishlisted ? (
@@ -108,7 +108,7 @@ const ProductCard2: FC<ProductCardProps> = ({
           </button>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 

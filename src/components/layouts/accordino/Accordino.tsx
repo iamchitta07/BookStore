@@ -6,7 +6,8 @@ const Accordino = () => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
   return (
-    <div className="w-full px-4 py-10 md:px-8 lg:px-16">
+    <div className="w-full px-4 py-10 md:px-8 lg:px-20">
+      <h1 className="text-6xl font-bold uppercase mb-10">Explore Categories</h1>
       <div className="flex flex-col md:flex-row w-full h-200 border-5 border-black overflow-hidden">
         {accordinoConst.map((panel, index) => {
           const isActive = index === activeIndex;

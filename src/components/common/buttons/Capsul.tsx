@@ -7,9 +7,9 @@ const Capsul: FC<ButtonProps> = ({ text, href, icon, color, bgColor }) => {
   return (
     <Link
       to={href}
-      className={`${bgColor} border-black border-2 px-4 py-1 rounded-full duration-200 hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] flex justify-center items-center gap-1`}
+      className={`${bgColor} border-black border-2 px-5 py-1 rounded-full duration-200 shadow-[2px_2px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-1 active:translate-1.5 flex justify-center items-center gap-1`}
     >
-      <h1 className={`${color}`}>{text}</h1>
+      <h1 className={`${color} text-xl`}>{text}</h1>
       <>{icon}</>
     </Link>
   );

@@ -5,12 +5,20 @@ export const fetchShopCounts = createAsyncThunk(
   "shop/fetchShopCounts",
   async () => {
     const [cartRes, wishRes] = await Promise.all([
-      api.get("/sales/cart"),
-      api.get("/favourites/")
+      api.get("/sales/cart").catch(() => ({ data: { items: [] } })),
+      api.get("/favourites/").catch(() => ({ data: [] }))
     ]);
+
+    const wishlistData = wishRes.data || [];
+    const map: Record<number, number> = {};
+    wishlistData.forEach((fav: any) => {
+      map[fav.book_id] = fav.id;
+    });
+
     return {
       cartCount: cartRes.data?.items?.length || 0,
-      wishlistCount: wishRes.data?.length || 0
+      wishlistCount: wishlistData.length || 0,
+      wishlistMap: map,
     };
   }
 );
@@ -18,11 +26,13 @@ export const fetchShopCounts = createAsyncThunk(
 interface ShopState {
   cartCount: number;
   wishlistCount: number;
+  wishlistMap: Record<number, number>;
 }
 
 const initialState: ShopState = {
   cartCount: 0,
-  wishlistCount: 0
+  wishlistCount: 0,
+  wishlistMap: {},
 };
 
 const shopSlice = createSlice({
@@ -40,6 +50,7 @@ const shopSlice = createSlice({
     builder.addCase(fetchShopCounts.fulfilled, (state, action) => {
       state.cartCount = action.payload.cartCount;
       state.wishlistCount = action.payload.wishlistCount;
+      state.wishlistMap = action.payload.wishlistMap;
     });
   }
 });

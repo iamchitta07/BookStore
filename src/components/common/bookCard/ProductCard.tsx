@@ -8,8 +8,6 @@ import { offPrice } from "../../../utils";
 const ProductCard: FC<ProductCardProps> = ({
   imageUrl,
   title,
-  rating,
-  totalReviews,
   isbn = '',
   author,
   originalPrice,
@@ -25,9 +23,9 @@ const ProductCard: FC<ProductCardProps> = ({
   };
 
   return (
-    <div className="w-[231px] bg-white border border-black hover:shadow-[2px_2px_0px_#000] shadow-none hover:translate-0.5 duration-200 p-3.5 font-sans flex flex-col">
+    <div className="w-58 bg-white border border-black hover:shadow-[6px_6px_0px_#000] shadow-none hover:translate-0.5 duration-200 p-3.5 font-sans flex flex-col">
       {/* Image Container */}
-      <div className="w-[200px] h-[280px] bg-white border border-black hover:shadow-[2px_2px_0px_#000] duration-200 relative group shrink-0">
+      <div className="w-50 h-70 bg-white border border-black hover:shadow-[2px_2px_0px_#000] duration-200 relative group shrink-0">
         <img src={imageUrl} alt={title} className="w-full h-full object-cover" />
         {/* Wishlist Button */}
         <button
@@ -82,7 +80,7 @@ const ProductCard: FC<ProductCardProps> = ({
         <div className="flex items-center gap-6 mt-2.5">
           <button
             onClick={onAddToCart}
-            className="w-[81px] h-5 bg-col-one border border-black shadow-[2px_2px_0px_#000] flex items-center justify-center gap-1 hover:translate-0.5 hover:shadow-none transition-all active:shadow-none active:translate-0.75"
+            className="w-20 h-5 bg-col-one border border-black shadow-[2px_2px_0px_#000] flex items-center justify-center gap-1 hover:translate-0.5 hover:shadow-none transition-all active:shadow-none active:translate-0.75"
           >
             <span className="text-[8px] font-bold text-black uppercase leading-none mt-0.5">
               Add To Cart
@@ -92,7 +90,7 @@ const ProductCard: FC<ProductCardProps> = ({
 
           <button
             onClick={onBuyNow}
-            className="w-[81px] h-5 bg-col-two border border-black shadow-[2px_2px_0px_#000] flex items-center justify-center gap-1 hover:translate-0.5 hover:shadow-none transition-all active:shadow-none active:translate-0.75"
+            className="w-20 h-5 bg-col-two border border-black shadow-[2px_2px_0px_#000] flex items-center justify-center gap-1 hover:translate-0.5 hover:shadow-none transition-all active:shadow-none active:translate-0.75"
           >
             <span className="text-[8px] font-bold text-black uppercase leading-none mt-0.5">
               Buy Now
