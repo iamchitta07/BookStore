@@ -84,6 +84,15 @@ const ProductPage = () => {
     if (id) fetchProduct();
   }, [id]);
 
+  /* ─── Update Document Title ────────────────────────────── */
+  useEffect(() => {
+    if (book) {
+      document.title = `${book.title} | ${book.author}`;
+    } else {
+      document.title = "Book Details | BookStore";
+    }
+  }, [book]);
+
   /* ─── Fetch reviewer usernames ───────────────────────────── */
   useEffect(() => {
     if (reviews.length === 0) return;
@@ -331,7 +340,7 @@ const ProductPage = () => {
             <h2 className="text-4xl font-black uppercase text-black">Similar Books</h2>
             <Capsul
               text="View More"
-              href={`/shop?categories=${mainCategory}`}
+              href={`/category/${mainCategory}`}
               icon={<FaChevronRight size={24} color="white" />}
               color="text-white"
               bgColor="bg-delete-btn"

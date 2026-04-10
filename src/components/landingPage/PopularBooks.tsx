@@ -68,7 +68,7 @@ const PopularBooks = () => {
           <h1 className="text-4xl font-bold">Popular Books</h1>
           <Capsul
             text="See More"
-            href="/shop"
+            href="/category/popular"
             icon={<FaChevronRight size={24} color="white" />}
             color="text-white"
             bgColor="bg-delete-btn"
@@ -86,7 +86,7 @@ const PopularBooks = () => {
         <h1 className="text-4xl font-bold">Popular Books</h1>
         <Capsul
           text="See More"
-          href="/shop"
+          href="/category/popular"
           icon={<FaChevronRight size={24} color="white" />}
           color="text-white"
           bgColor="bg-delete-btn"

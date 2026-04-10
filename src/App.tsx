@@ -18,6 +18,7 @@ import AdminRoute from "./routes/AdminRoute";
 import Admin from "./components/admin/Admin";
 import Sell from "./components/sell/Sell";
 import AddProduct from "./components/addProductPage/AddProduct";
+import CategoryBooks from "./components/categorywiseBooks/CategoryBooks";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,7 @@ const router = createBrowserRouter([
           {path: 'cart', element: <Cart />},
           {path: 'user', element: <UserPage />},
           {path: 'product/:id', element: <ProductPage />},
+          {path: 'category/:category', element: <CategoryBooks />},
           {
             element: <AdminRoute />,
             children: [

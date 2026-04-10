@@ -10,6 +10,9 @@ import { fetchShopCounts } from "../../features/shop/shopSlice";
 import type { AppDispatch } from "../../app/store";
 
 const Cart = () => {
+  useEffect(() => {
+    document.title = "Cart | BookStore";
+  }, []);
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const [cartItems, setCartItems] = useState<BackendCartItemProps[]>([]);

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../app/store";
@@ -14,6 +14,9 @@ import {
 } from "../common/inputFields/InputField";
 
 const Signup = () => {
+  useEffect(() => {
+    document.title = "Signup | BookStore";
+  }, []);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showConfirm, setShowConfirm] = useState<boolean>(false);
   const [agreed, setAgreed] = useState<boolean>(false);

@@ -16,6 +16,7 @@ const LandingPage = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
+    document.title = "Home | BookStore";
     // Fetch common landing page data once
     dispatch(fetchBestDeals());
     dispatch(fetchShopCounts());

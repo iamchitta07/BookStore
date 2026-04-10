@@ -1,5 +1,5 @@
-import { useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useRef, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import api from "../../services/axios";
 import type { BookResponse } from "../../types";
 
@@ -357,6 +357,14 @@ const PreviewModal = ({
 ═══════════════════════════════════════════════════════════ */
 const AddProduct = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const editBook: BookResponse | undefined = (location.state as any)?.editBook;
+  const isEditMode = !!editBook;
+
+  useEffect(() => {
+    document.title = isEditMode ? "Edit Book | BookStore" : "Sell Book | BookStore";
+  }, [isEditMode]);
+
   const [form, setForm] = useState<FormState>(INITIAL_FORM);
   const [tagInput, setTagInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -365,6 +373,26 @@ const AddProduct = () => {
   const [showPreview, setShowPreview] = useState(false);
 
   const tagInputRef = useRef<HTMLInputElement>(null);
+
+  /* ─── Pre-populate form when in edit mode ─────────────── */
+  useEffect(() => {
+    if (editBook) {
+      setForm({
+        isbn: editBook.isbn ?? "",
+        title: editBook.title ?? "",
+        author: editBook.author ?? "",
+        publisher: editBook.publisher ?? "",
+        edition: editBook.edition ?? "",
+        publication_year: editBook.publication_year?.toString() ?? "",
+        price: editBook.price?.toString() ?? "",
+        discount_percentage: editBook.discount_percentage?.toString() ?? "0",
+        stock_quantity: editBook.stock_quantity?.toString() ?? "0",
+        cover_image_url: editBook.cover_image_url ?? "",
+        description: editBook.description ?? "",
+        category: editBook.category ?? [],
+      });
+    }
+  }, [editBook?.id]);
 
   /* ─── Helpers ─────────────────────────────────────────── */
   const setField = (key: keyof FormState, value: string) =>
@@ -436,19 +464,31 @@ const AddProduct = () => {
 
     try {
       setLoading(true);
-      const res = await api.post<BookResponse>("/books/", payload);
-      setSuccess(`✓ Book "${res.data.title}" added successfully! (ID: ${res.data.id})`);
-      setForm(INITIAL_FORM);
-      setTagInput("");
+      let res: { data: BookResponse };
 
-      // Navigate to the new book after a short delay
+      if (isEditMode && editBook) {
+        // PUT / update existing book
+        res = await api.put<BookResponse>(`/books/${editBook.id}`, payload);
+        setSuccess(`✓ Book "${res.data.title}" updated successfully!`);
+      } else {
+        // POST / create new book
+        res = await api.post<BookResponse>("/books/", payload);
+        setSuccess(`✓ Book "${res.data.title}" added successfully! (ID: ${res.data.id})`);
+        setForm(INITIAL_FORM);
+        setTagInput("");
+      }
+
+      // Navigate to the book after a short delay
       setTimeout(() => navigate(`/product/${res.data.id}`), 1800);
     } catch (err: any) {
       const detail = err.response?.data?.detail;
       if (Array.isArray(detail)) {
         setError(detail.map((d: any) => d.msg).join(". "));
       } else {
-        setError(detail || "Failed to add book. Please try again.");
+        setError(
+          detail ||
+            (isEditMode ? "Failed to update book. Please try again." : "Failed to add book. Please try again.")
+        );
       }
     } finally {
       setLoading(false);
@@ -514,7 +554,7 @@ const AddProduct = () => {
 
       <div style={pageStyle}>
         {/* ── Page Title ───────────────────────────────────── */}
-        <h1 style={headingStyle}>Add New Book</h1>
+        <h1 style={headingStyle}>{isEditMode ? "Edit Book" : "Add New Book"}</h1>
 
         <p style={subTextStyle}>
           Populate the global archive with raw data. All fields must be
@@ -870,7 +910,7 @@ const AddProduct = () => {
                     el.style.boxShadow = loading ? "none" : "5px 5px 0 #000";
                   }}
                 >
-                  {loading ? "Saving…" : "Save Entry"}
+                  {loading ? (isEditMode ? "Updating…" : "Saving…") : (isEditMode ? "Update Entry" : "Save Entry")}
                 </button>
 
                 {/* PREVIEW + DISCARD row */}

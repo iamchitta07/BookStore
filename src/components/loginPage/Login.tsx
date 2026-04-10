@@ -1,6 +1,6 @@
 import LOGIN_IMG from "/images/Login.webp";
 import LOGO from "/icons/LOGO_BLACK.svg";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CheckBoxField, InputField, PasswordField, SubmitBox } from "../common/inputFields/InputField";
 import { Link, useNavigate, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,6 +8,9 @@ import type { AppDispatch, RootState } from "../../app/store";
 import { loginUser } from "../../features/auth/authThunk";
 
 const Login = () => {
+  useEffect(() => {
+    document.title = "Login | BookStore";
+  }, []);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [agreed, setAgreed] = useState<boolean>(false);
   

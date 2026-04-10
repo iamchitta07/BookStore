@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import type { FC, CSSProperties } from "react";
 import { FaUser } from "react-icons/fa6";
 
@@ -11,8 +10,7 @@ const VendorCard: FC<VendorProps> = ({ username, sold, rank }) => {
   const rankColor = colors[rank - 1];
 
   return (
-    <Link
-      to={username}
+    <div
       className="grid grid-cols-[120px_1fr] w-full h-30 border duration-300 shadow-[1px_1px_0px_rgba(0,0,0,1)] hover:shadow-[5px_5px_0px_var(--vendor-color)] bg-white"
       style={{ "--vendor-color": rgbCol } as CSSProperties}
     >
@@ -38,7 +36,7 @@ const VendorCard: FC<VendorProps> = ({ username, sold, rank }) => {
         <h1 className="font-bold">{username}</h1>
         <h1 className="text-expired">Sold {formatUsNumber(sold)} copies of book.</h1>
       </div>
-    </Link>
+    </div>
   );
 };
 

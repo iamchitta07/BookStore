@@ -37,6 +37,7 @@ const ProductCard2: FC<ProductCardProps> = ({
           <button
             onClick={(e) => {
               e.preventDefault();
+              e.stopPropagation();
               if (onWishlistClick) onWishlistClick();
             }}
             className="absolute top-1.5 right-1.5 flex items-center justify-center transition-transform hover:scale-110 active:scale-95 z-20"
@@ -93,6 +94,7 @@ const ProductCard2: FC<ProductCardProps> = ({
           <button
             onClick={(e) => {
               e.preventDefault();
+              e.stopPropagation();
               if (onAddToCart) onAddToCart();
             }}
             className="px-3 py-1 bg-col-one border border-black shadow-[2px_2px_0px_#000] flex items-center justify-center gap-0.5 hover:translate-0.5 hover:shadow-none transition-all active:shadow-none active:translate-1"
@@ -106,6 +108,7 @@ const ProductCard2: FC<ProductCardProps> = ({
           <button
             onClick={(e) => {
               e.preventDefault();
+              e.stopPropagation();
               if (onBuyNow) onBuyNow();
             }}
             className="px-3 py-1 bg-col-two border border-black shadow-[2px_2px_0px_#000] flex items-center justify-center gap-0.5 hover:translate-0.5 hover:shadow-none transition-all active:shadow-none active:translate-1"

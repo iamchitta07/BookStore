@@ -118,7 +118,7 @@ const CategoryWiseBooks = ({
         <h1 className="uppercase text-4xl font-bold">{categoryTitle}</h1>
         <Capsul
           text="See More"
-          href={`/shop?categories=${category}`}
+          href={`/category/${category}`}
           icon={<FaChevronRight size={24} color="white" />}
           color="text-white"
           bgColor="bg-delete-btn"
@@ -129,7 +129,7 @@ const CategoryWiseBooks = ({
           <img src={IMG} alt={categoryTitle} className="object-cover h-full w-full" />
           <Capsul
             text="View More"
-            href={`/shop?categories=${category}`}
+            href={`/category/${category}`}
             icon={<FaChevronRight size={24} color="black" />}
             color="text-black"
             bgColor="bg-col-seven absolute bottom-4 right-4"

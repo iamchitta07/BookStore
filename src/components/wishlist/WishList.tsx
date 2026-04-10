@@ -8,6 +8,9 @@ import { fetchShopCounts } from "../../features/shop/shopSlice";
 import type { AppDispatch } from "../../app/store";
 
 const WishList = () => {
+  useEffect(() => {
+    document.title = "Wishlist | BookStore";
+  }, []);
   const dispatch = useDispatch<AppDispatch>();
   const [favourites, setFavourites] = useState<FavouriteResponse[]>([]);
   const [loading, setLoading] = useState(true);
@@ -89,6 +92,7 @@ const WishList = () => {
           {filteredFavourites.map((fav) => (
             <ProductCard
               key={fav.id}
+              id={fav.book.id}
               imageUrl={fav.book.cover_image_url || "https://books.google.com/books/content?id=NM5PqgKd2dsC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"}
               title={fav.book.title}
               author={fav.book.author}

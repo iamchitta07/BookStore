@@ -4,6 +4,9 @@ import InputField from "./InputField";
 import type {UserData} from "../../types";
 
 const UserPage = () => {
+  useEffect(() => {
+    document.title = "Profile | BookStore";
+  }, []);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [userName, setUserName] = useState<[string, string]>(["", ""]);
