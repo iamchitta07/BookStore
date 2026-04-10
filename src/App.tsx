@@ -10,6 +10,7 @@ import Cart from "./components/cart/Cart";
 import Login from "./components/loginPage/Login";
 import Signup from "./components/signup/Signup";
 import UserPage from "./components/userPage/UserPage";
+import ProductPage from "./components/productPage/ProductPage";
 
 import ProtectedRoute from "./routes/ProtectedRoute";
 
@@ -43,6 +44,7 @@ const router = createBrowserRouter([
           {path: 'wishlist', element: <WishList />},
           {path: 'cart', element: <Cart />},
           {path: 'user', element: <UserPage />},
+          {path: 'product/:id', element: <ProductPage />},
           {
             element: <AdminRoute />,
             children: [

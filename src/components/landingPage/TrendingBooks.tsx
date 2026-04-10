@@ -32,7 +32,7 @@ const TrendingBooks = () => {
       {books.map((book) => (
         <TrendingBooksCard
           key={book.id}
-          href={`/books/${book.id}`}
+          href={`/product/${book.id}`}
           isbn={book.isbn}
           title={book.title}
           author={book.author}

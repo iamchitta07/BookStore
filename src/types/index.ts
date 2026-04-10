@@ -146,6 +146,7 @@ export interface BookResponse {
   discount_percentage?: number;
   stock_quantity: number;
   admin_id?: number;
+  reviews?: any[];
 }
 
 export interface FavouriteResponse {
@@ -168,4 +169,33 @@ export interface BackendCartItemProps {
     stock_quantity: number;
     cover_image_url: string;
   };
+}
+
+export interface PublicUser {
+  id: number;
+  username: string;
+  first_name: string;
+  last_name: string;
+}
+
+export interface ReviewItem {
+  id: number;
+  user_id: number;
+  book_id: number;
+  rating: number;
+  comment?: string;
+  timestamp: string;
+}
+
+export interface ReviewProps {
+    handleSubmitReview: (e: React.FormEvent) => void;
+    newRating: number;
+    setNewRating: (r: number) => void;
+    newComment: string;
+    setNewComment: (c: string) => void;
+    reviews: ReviewItem[];
+    reviewUsers: Record<number, string>;
+    submitLoading: boolean;
+    submitError: string | null;
+    submitSuccess: boolean;
 }

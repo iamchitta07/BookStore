@@ -25,8 +25,8 @@ const ProductCard2: FC<ProductCardProps> = ({
   };
 
   return (
-    <div
-      // to={`/product/${id}`}
+    <Link
+      to={`/product/${id}`}
       className="pl-1 pr-2 h-46.5 rounded-lg bg-white border border-black hover:shadow-[4px_4px_0px_#000] shadow-none hover:translate-0.5 duration-200 font-sans flex"
     >
       {/* Left side: Image Container */}
@@ -35,8 +35,11 @@ const ProductCard2: FC<ProductCardProps> = ({
           <img src={imageUrl} alt={title} className="w-full h-full object-cover" />
           {/* Wishlist Button */}
           <button
-            onClick={onWishlistClick}
-            className="absolute top-1.5 right-1.5 flex items-center justify-center transition-transform hover:scale-110 active:scale-95 z-100"
+            onClick={(e) => {
+              e.preventDefault();
+              if (onWishlistClick) onWishlistClick();
+            }}
+            className="absolute top-1.5 right-1.5 flex items-center justify-center transition-transform hover:scale-110 active:scale-95 z-20"
             aria-label="Wishlist"
           >
             {isWishlisted ? (
@@ -88,7 +91,10 @@ const ProductCard2: FC<ProductCardProps> = ({
         {/* Action Buttons */}
         <div className="flex items-center gap-3.5 mt-2">
           <button
-            onClick={onAddToCart}
+            onClick={(e) => {
+              e.preventDefault();
+              if (onAddToCart) onAddToCart();
+            }}
             className="px-3 py-1 bg-col-one border border-black shadow-[2px_2px_0px_#000] flex items-center justify-center gap-0.5 hover:translate-0.5 hover:shadow-none transition-all active:shadow-none active:translate-1"
           >
             <span className="text-xs font-bold text-black uppercase leading-none mt-0.5">
@@ -98,7 +104,10 @@ const ProductCard2: FC<ProductCardProps> = ({
           </button>
 
           <button
-            onClick={onBuyNow}
+            onClick={(e) => {
+              e.preventDefault();
+              if (onBuyNow) onBuyNow();
+            }}
             className="px-3 py-1 bg-col-two border border-black shadow-[2px_2px_0px_#000] flex items-center justify-center gap-0.5 hover:translate-0.5 hover:shadow-none transition-all active:shadow-none active:translate-1"
           >
             <span className="text-xs font-bold text-black uppercase leading-none mt-0.5">
@@ -108,7 +117,7 @@ const ProductCard2: FC<ProductCardProps> = ({
           </button>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
