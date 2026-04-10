@@ -1,9 +1,5 @@
 import { ACCORDINO, CAROUSEL } from "./IMAGES";
-import type {
-  UnderNavProps,
-  AccordinoProps,
-  CentralCarouselProps,
-} from "../types";
+import type { UnderNavProps, AccordinoProps, CentralCarouselProps } from "../types";
 
 export const colors: string[] = ["#FD5A46", "#FB7DA8", "#A6FAFF", "#A5B4FB", "#058CD7"];
 
@@ -14,7 +10,7 @@ export const underNavEle: UnderNavProps[] = [
   },
   {
     title: "Sell Book",
-    href: "sell",
+    href: "add-product",
   },
   {
     title: "Publication",
@@ -29,7 +25,6 @@ export const underNavEle: UnderNavProps[] = [
     href: "vendor",
   },
 ];
-
 
 // Accordino Constants
 export const accordinoConst: AccordinoProps[] = [

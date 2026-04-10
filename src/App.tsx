@@ -17,6 +17,7 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 import AdminRoute from "./routes/AdminRoute";
 import Admin from "./components/admin/Admin";
 import Sell from "./components/sell/Sell";
+import AddProduct from "./components/addProductPage/AddProduct";
 
 const router = createBrowserRouter([
   {
@@ -49,7 +50,8 @@ const router = createBrowserRouter([
             element: <AdminRoute />,
             children: [
               { path: 'admin', element: <Admin /> },
-              { path: 'sell', element: <Sell /> }
+              { path: 'sell', element: <Sell /> },
+              { path: 'add-product', element: <AddProduct /> }
             ]
           }
         ]
